@@ -295,6 +295,33 @@ const RegisterForm = ({ user }: { user: User }) => {
           )}
         />
 
+        <section className="space-y-6">
+          <div className="mb-9 space-y-1">
+            <h2 className="sub-header">Privacidad</h2>
+          </div>
+        </section>
+
+        <CustomFormField
+          fieldType={FormFieldType.CHECKBOX}
+          control={form.control}
+          name="treatmentConsent"
+          label="Estoy de acuerdo con el tratamiento"
+        />
+
+        <CustomFormField
+          fieldType={FormFieldType.CHECKBOX}
+          control={form.control}
+          name="disclosureConsent"
+          label="Estoy de acuerdo con el manejo de la información"
+        />
+
+        <CustomFormField
+          fieldType={FormFieldType.CHECKBOX}
+          control={form.control}
+          name="privacyConsent"
+          label="Estoy de acuerdo con la privacidad"
+        />
+
         <SubmitButton isLoading={isLoading}>Empezar</SubmitButton>
       </form>
     </Form>
