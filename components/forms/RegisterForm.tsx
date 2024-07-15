@@ -2,20 +2,22 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserFormValidation } from "@/lib/validation";
 import { createUser } from "@/lib/actions/patient.actions";
+import { Doctors, GenderOptions } from "@/constants";
 
 import { Form, FormControl } from "@/components/ui/form";
 import CustomFormField from "../CustomFormField";
 import SubmitButton from "../SubmitButton";
 import { FormFieldType } from "./PatientForm";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
-import { GenderOptions } from "@/constants";
 import { Label } from "../ui/label";
+import { SelectItem } from "../ui/select";
 
 const RegisterForm = ({ user }: { user: User }) => {
   const router = useRouter();
@@ -60,7 +62,7 @@ const RegisterForm = ({ user }: { user: User }) => {
       >
         <section className="space-y-4">
           <h1 className="header">Bienvenido 👋</h1>
-          <p className="text-dark-700">Queremos saber más sobre ti</p>
+          <p className="text-dark-700">Queremos saber más sobre vos</p>
         </section>
 
         <section className="space-y-6">
@@ -143,7 +145,7 @@ const RegisterForm = ({ user }: { user: User }) => {
           />
 
           <CustomFormField
-            fieldType={FormFieldType.PHONE_INPUT}
+            fieldType={FormFieldType.INPUT}
             control={form.control}
             name="occupation"
             label="Ocupación"
@@ -175,7 +177,64 @@ const RegisterForm = ({ user }: { user: User }) => {
           </div>
         </section>
 
-        <div className="flex flex-col gap-6 xl:flex-row"></div>
+        <CustomFormField
+          fieldType={FormFieldType.SELECT}
+          control={form.control}
+          name="primaryPhysician"
+          label="Médico primario"
+          placeholder="Elegir un médico"
+        >
+          {Doctors.map((doctor) => (
+            <SelectItem key={doctor.name} value={doctor.name}>
+              <div className="flex cursor-pointer items-center gap-2">
+                <Image
+                  src={doctor.image}
+                  width={32}
+                  height={32}
+                  alt={doctor.name}
+                  className="rounded-full border border-dark-500"
+                />
+                <p>{doctor.name}</p>
+              </div>
+            </SelectItem>
+          ))}
+        </CustomFormField>
+
+        <div className="flex flex-col gap-6 xl:flex-row">
+          <CustomFormField
+            fieldType={FormFieldType.INPUT}
+            control={form.control}
+            name="insuranceProvider"
+            label="Provedor de seguros"
+            placeholder="Sura"
+          />
+
+          <CustomFormField
+            fieldType={FormFieldType.INPUT}
+            control={form.control}
+            name="insurancePolicyNumber"
+            label="Número de poliza"
+            placeholder="ABC123456789"
+          />
+        </div>
+
+        <div className="flex flex-col gap-6 xl:flex-row">
+          <CustomFormField
+            fieldType={FormFieldType.INPUT}
+            control={form.control}
+            name="insuranceProvider"
+            label="Provedor de seguros"
+            placeholder="Sura"
+          />
+
+          <CustomFormField
+            fieldType={FormFieldType.INPUT}
+            control={form.control}
+            name="insurancePolicyNumber"
+            label="Número de poliza"
+            placeholder="ABC123456789"
+          />
+        </div>
 
         <SubmitButton isLoading={isLoading}>Empezar</SubmitButton>
       </form>
