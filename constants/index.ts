@@ -27,17 +27,17 @@ export const PatientFormDefaultValues = {
 };
 
 export const IdentificationTypes = [
-  "Birth Certificate",
-  "Driver's License",
-  "Medical Insurance Card/Policy",
-  "Military ID Card",
-  "National Identity Card",
-  "Passport",
-  "Resident Alien Card (Green Card)",
-  "Social Security Card",
-  "State ID Card",
-  "Student ID Card",
-  "Voter ID Card",
+  "Acta de nacimiento",
+  "Licencia de conducir",
+  "Tarjeta/póliza de seguro médico",
+  "Tarjeta de identificación militar",
+  "Cédula de identidad nacional",
+  "Pasaporte",
+  "Tarjeta de residente extranjero (Green Card)",
+  "Tarjeta de Seguro Social",
+  "Tarjeta de identificación estatal",
+  "Tarjeta de identificación de estudiante",
+  "Tarjeta de identificación de votante",
 ];
 
 export const Doctors = [

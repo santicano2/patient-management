@@ -9,7 +9,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserFormValidation } from "@/lib/validation";
 import { createUser } from "@/lib/actions/patient.actions";
-import { Doctors, GenderOptions } from "@/constants";
+import { Doctors, GenderOptions, IdentificationTypes } from "@/constants";
 
 import { Form, FormControl } from "@/components/ui/form";
 import CustomFormField from "../CustomFormField";
@@ -18,6 +18,7 @@ import { FormFieldType } from "./PatientForm";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { Label } from "../ui/label";
 import { SelectItem } from "../ui/select";
+import FileUploader from "../FileUploader";
 
 const RegisterForm = ({ user }: { user: User }) => {
   const router = useRouter();
@@ -220,21 +221,79 @@ const RegisterForm = ({ user }: { user: User }) => {
 
         <div className="flex flex-col gap-6 xl:flex-row">
           <CustomFormField
-            fieldType={FormFieldType.INPUT}
+            fieldType={FormFieldType.TEXTAREA}
             control={form.control}
-            name="insuranceProvider"
-            label="Provedor de seguros"
-            placeholder="Sura"
+            name="allergies"
+            label="Alergias (si hay)"
+            placeholder="Maní, cereales, ..."
           />
 
           <CustomFormField
-            fieldType={FormFieldType.INPUT}
+            fieldType={FormFieldType.TEXTAREA}
             control={form.control}
-            name="insurancePolicyNumber"
-            label="Número de poliza"
-            placeholder="ABC123456789"
+            name="currentMedication"
+            label="Medicamentos actuales (si hay)"
+            placeholder="Paracetamol, ibuprofeno, ..."
           />
         </div>
+
+        <div className="flex flex-col gap-6 xl:flex-row">
+          <CustomFormField
+            fieldType={FormFieldType.TEXTAREA}
+            control={form.control}
+            name="familyMedicalHistory"
+            label="Historia medica familiar"
+            placeholder="Diabetes, hipertensión, ..."
+          />
+
+          <CustomFormField
+            fieldType={FormFieldType.TEXTAREA}
+            control={form.control}
+            name="pastMedicalHistory"
+            label="Historia medica pasada"
+            placeholder="Diabetes, hipertensión, ..."
+          />
+        </div>
+
+        <section className="space-y-6">
+          <div className="mb-9 space-y-1">
+            <h2 className="sub-header">Identificación y verificación</h2>
+          </div>
+        </section>
+
+        <CustomFormField
+          fieldType={FormFieldType.SELECT}
+          control={form.control}
+          name="identificationType"
+          label="Tipo de identificación"
+          placeholder="Elegir un tipo de identificación"
+        >
+          {IdentificationTypes.map((type) => (
+            <SelectItem key={type} value={type}>
+              {type}
+            </SelectItem>
+          ))}
+        </CustomFormField>
+
+        <CustomFormField
+          fieldType={FormFieldType.INPUT}
+          control={form.control}
+          name="identificationNumber"
+          label="Número de identificación"
+          placeholder="123456789"
+        />
+
+        <CustomFormField
+          fieldType={FormFieldType.SKELETON}
+          control={form.control}
+          name="identificationDocument"
+          label="Cargar documento de identificación"
+          renderSkeleton={(field) => (
+            <FormControl>
+              <FileUploader files={field.value} onChange={field.onChange} />
+            </FormControl>
+          )}
+        />
 
         <SubmitButton isLoading={isLoading}>Empezar</SubmitButton>
       </form>
