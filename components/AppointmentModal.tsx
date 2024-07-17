@@ -35,7 +35,7 @@ const AppointmentModal = ({
           variant="ghost"
           className={`capitalize ${type === "pendiente" && "text-green-500"}`}
         >
-          {type}
+          {type === "pendiente" ? "Programar" : "Cancelar"}
         </Button>
       </DialogTrigger>
       <DialogContent className="shad-dialog sm:max-w-md">
