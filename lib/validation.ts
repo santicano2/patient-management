@@ -112,9 +112,9 @@ export const CancelAppointmentSchema = z.object({
 
 export function getAppointmentSchema(type: string) {
   switch (type) {
-    case "create":
+    case "crear":
       return CreateAppointmentSchema;
-    case "cancel":
+    case "cancelado":
       return CancelAppointmentSchema;
     default:
       return ScheduleAppointmentSchema;
