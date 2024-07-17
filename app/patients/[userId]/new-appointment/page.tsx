@@ -20,7 +20,7 @@ export default async function NewAppointment({
           />
 
           <AppointmentForm
-            type="create"
+            type="crear"
             userId={userId}
             patientId={patient.$id}
           />
