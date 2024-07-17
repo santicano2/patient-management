@@ -80,7 +80,7 @@ export const Doctors = [
 ];
 
 export const StatusIcon = {
-  scheduled: "/assets/icons/check.svg",
-  pending: "/assets/icons/pending.svg",
-  cancelled: "/assets/icons/cancelled.svg",
+  solicitado: "/assets/icons/check.svg",
+  pendiente: "/assets/icons/pending.svg",
+  cancelado: "/assets/icons/cancelled.svg",
 };
